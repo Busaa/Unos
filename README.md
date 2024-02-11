@@ -3,6 +3,30 @@ Repository for our implementaion of an Uno style game using raylib library for C
 
 Uno: https://pt.wikipedia.org/wiki/Uno_(jogo_de_cartas)
 
+WorkFlow:
+
+Para criar um jogo Uno simples em C usando a biblioteca raylib, você pode seguir este fluxo de trabalho básico:
+
+1. **Definição das Estruturas de Dados:**
+   - Crie estruturas de dados para representar o baralho, a mão dos jogadores, a pilha de descarte e a ordem das jogadas. Use TADs para modelar essas entidades de forma genérica e modular.
+
+2. **Implementação da Interface de Texto:**
+   - Use a raylib para criar uma interface de texto simples que apresente o menu do jogo e o espaço de jogo.
+   - Implemente funções para mostrar o menu, exibir o estado atual do jogo e capturar entrada do jogador.
+
+3. **Implementação da Lógica do Jogo:**
+   - Desenvolva a lógica do jogo Uno, incluindo regras para distribuição de cartas, jogadas dos jogadores, compra de cartas, etc.
+   - Utilize as estruturas de dados definidas anteriormente para representar o estado do jogo e manipular as jogadas dos jogadores.
+
+4. **Interação com o Usuário:**
+   - Permita que o jogador interaja com o jogo através da interface de texto, realizando jogadas, escolhendo cartas, etc.
+   - Valide as jogadas do jogador de acordo com as regras do Uno.
+
+5. **Implementação de Recursos Extras (Opcionais):**
+   - Se desejar, adicione recursos extras como efeitos sonoros, salvamento de estado do jogo, interface gráfica simples, etc.
+   - Utilize a raylib para adicionar elementos gráficos ao jogo, como cores e formas básicas.
+  
+   
 Requisitos Basicos Gerais ´
 • Deve-se usar os conceitos de tipos abstratos de dados (TADs). Tanto as estruturas de dados gen´ericas (que
 modelam colec¸oes de dados) quanto outras entidades modeladas devem ser representadas por TADs. Estruture ˜
