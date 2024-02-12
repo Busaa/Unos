@@ -18,7 +18,7 @@
 //Main
 int main(void)
 {
-    // Iniciando vari·veis
+    // Iniciando vari√°veis
     PilhaEnc baralho;
     PilhaEnc mesa;
     ListaCirc2 ordem_jogadores;
@@ -32,7 +32,12 @@ int main(void)
 
     //Menu Inicialization
     Menu* menu = InitMenu();
-
+    InitAudioDevice(); //Audio ligado
+    Audio* menuMusic = InitAudio("music/rebound sucks - elenne.mp3"); //Menu music
+    PlayAudio(menuMusic);
+    Audio* menuStart = InitAudio("music/eu-carrego.mp3"); //Menu start
+    PlayAudio(menuStart);
+    
     // Main game loop
     while (!WindowShouldClose()) //While Esc or leave window(x) arent pressed
     {
@@ -51,4 +56,11 @@ int main(void)
     } //Left Game loop
 
     CloseWindow();  //Close the Windown
+
+    //Freeing memory space
+    free(menu);
+    UnloadAudio(menuMusic);
+
+    return 0;
 }
+
