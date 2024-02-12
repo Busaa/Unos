@@ -25,30 +25,28 @@ int main(void)
     ListaEnc2* mao = criaListaEnc2();
 
 
-    //Screen Initialization
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-    InitWindow(screenWidth, screenHeight, "UNOs");
-    SetTargetFPS(60);
-
     //Menu Inicialization
+    InitAudioDevice();
     Menu* menu = InitMenu();
-    InitAudioDevice(); //Audio ligado
+    //Aduio Inicialization
     Audio* menuMusic = InitAudio("music/rebound sucks - elenne.mp3"); //Menu music
     PlayAudio(menuMusic);
     Audio* menuStart = InitAudio("music/eu-carrego.mp3"); //Menu start
     PlayAudio(menuStart);
+    //Textures Inicialization
+    Texture2D audioIcon = LoadTexture("textures/audio-icon.png");
+    Texture2D redX = LoadTexture("textures/red-x.png");
 
     // Main game loop
     while (!WindowShouldClose()) //While Esc or leave window(x) arent pressed
     {
-        ProcessMenuInput(menu);
+        ProcessMenuInput(menu, menuMusic);
 
         BeginDrawing(); //Drawing
 
             ClearBackground(RAYWHITE);
 
-            DrawMenu(menu); //Menu Drawing
+            DrawMenu(menu, menuMusic, audioIcon, redX); //Menu Drawing
 
 
 
@@ -60,6 +58,8 @@ int main(void)
 
     //Freeing memory space
     free(menu);
+    //I cant free the audio things now and textures too, but the code is more compact with everything on Init Menu/DrawMe
+    UnloadTexture(audioIcon);
 
     return 0;
 }
