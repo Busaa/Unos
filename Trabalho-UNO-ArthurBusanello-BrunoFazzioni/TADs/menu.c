@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "raylib.h"
 
+
 //InitMenu initializes the menu with the play option selected
 Menu* InitMenu(void) { 
     Menu* menu = (Menu*)malloc(sizeof(Menu));
@@ -27,6 +28,9 @@ void MenuKeysInputs(Menu* menu) {
             case LEADERBOARD:
                 // Show leaderboard
                 break;
+            case LOAD:
+                //LOAD last save
+                break;
             case CONFIGURATION:
                 // Open configuration menu
                 break;
@@ -44,9 +48,10 @@ void MenuKeysInputs(Menu* menu) {
 void DrawMenu(Menu* menu) {
     
     DrawText("PLAY", 400, 50, 40, menu->currentOption == PLAY ? RED : BLACK);
-    DrawText("LEADEARBOARD", 400, 100, 40, menu->currentOption == LEADERBOARD ? RED : BLACK);
-    DrawText("CONFIGURATION", 400, 150, 40, menu->currentOption == CONFIGURATION ? RED : BLACK);
-    DrawText("EXIT", 400, 200, 40, menu->currentOption == EXIT ? RED : BLACK);
+    DrawText("LOAD", 400, 100, 40, menu->currentOption == LOAD ? RED : BLACK);
+    DrawText("LEADERBOARD", 400, 150, 40, menu->currentOption == LEADERBOARD ? RED : BLACK);
+    DrawText("CONFIGURATION", 400, 200, 40, menu->currentOption == CONFIGURATION ? RED : BLACK);
+    DrawText("EXIT", 400, 250, 40, menu->currentOption == EXIT ? RED : BLACK);
 }
 
 //Processes the Menu Inputs
@@ -58,8 +63,11 @@ void ProcessMenuInput(Menu* menu) {
             case PLAY:
                 menu->currentOption = EXIT;
                 break;
-            case LEADERBOARD:
+            case LOAD:
                 menu->currentOption = PLAY;
+                break;
+            case LEADERBOARD:
+                menu->currentOption = LOAD;
                 break;
             case CONFIGURATION:
                 menu->currentOption = LEADERBOARD;
@@ -73,6 +81,9 @@ void ProcessMenuInput(Menu* menu) {
     } else if (IsKeyPressed(KEY_DOWN)) {
         switch(menu->currentOption) {
             case PLAY:
+                menu->currentOption = LOAD;
+                break;
+            case LOAD:
                 menu->currentOption = LEADERBOARD;
                 break;
             case LEADERBOARD:
@@ -93,6 +104,9 @@ void ProcessMenuInput(Menu* menu) {
             case PLAY:
                 // Start gameplay
                 break;
+            case LOAD:
+                //Load last save
+                break;
             case LEADERBOARD:
                 // Show leaderboard
                 break;
@@ -108,4 +122,34 @@ void ProcessMenuInput(Menu* menu) {
     }
     //After moving the options the player can choose one
     MenuKeysInputs(menu);
+}
+
+//Sound Desing Things
+
+//Initialize a Music/Song/Sound with an file, initialize unMuted 0.5 volume
+Audio* InitAudio(const char* filename) {
+    Audio* audio = (Audio*)malloc(sizeof(Audio));
+    if (!audio) {
+        //Memory alocation error
+        return NULL;
+    }
+    audio->muted = false; //ta un-mutado
+    audio->volume = 0.5f; 
+    audio->sound = LoadSound(filename); 
+
+    return audio;
+}
+
+void UnloadAudio(Audio* audio) {
+    if (audio) {
+        UnloadSound(audio->sound);
+        free(audio);
+    }
+}
+
+
+
+void PlayAudio(Audio* audio){ //Playing Music
+    SetSoundVolume(audio->sound, audio->volume);
+    PlaySound(audio->sound);
 }
