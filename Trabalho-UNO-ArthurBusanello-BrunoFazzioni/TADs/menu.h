@@ -10,6 +10,7 @@
 
 typedef enum MenuOption { //Defines the possible options the menu 
     PLAY,
+    BOSS,
     CONFIGURATION,
     LOAD,
     LEADERBOARD,
@@ -30,10 +31,13 @@ typedef struct Audio{ //For Music, background ost etc
 
 Menu* InitMenu(void); //function to Inicializate the menu 
 void UpdateMenu(Menu* menu); //Updates the Menu
-void DrawMenu(Menu* menu);
-void ProcessMenuInput(Menu* menu);
+void DrawMenu(Menu* menu, Audio* menuMusic, Texture2D audioIcon, Texture2D redX);
+void ProcessMenuInput(Menu* menu, Audio* menuMusic);
 void PlayAudio(Audio* audio);
 Audio* InitAudio(const char* filename);
 void UnloadAudio(Audio* audio);
+void LoadMenuTextures();
+void UnloadMenuTextures();
+
 
 #endif // MENU_H end
