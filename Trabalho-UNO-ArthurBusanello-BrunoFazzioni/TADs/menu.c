@@ -7,17 +7,29 @@
 #include "raylib.h"
 
 
-//InitMenu initializes the menu with the play option selected
+//InitMenu initializes the menu with the play option selected, also loads all textures and audios for the game
 Menu* InitMenu(void) { 
+        
+    //Screen Initialization
+    const int screenWidth = 800;
+    const int screenHeight = 450;
+    InitWindow(screenWidth, screenHeight, "UNOs");
+    SetTargetFPS(60);
+
+
     Menu* menu = (Menu*)malloc(sizeof(Menu));
     if (!menu) exit(1); // Handle memory allocation failure
 
     menu->currentOption = PLAY; // Start with first option selected
     
-
-    
     
     return menu;
+}
+
+//Initializes all the game Textures
+void LoadMenuTextures() {
+    //iconPlay = LoadTexture("icon_play.png");
+    
 }
 
 //Updates to take the inputs from the keyboard
@@ -28,11 +40,14 @@ void MenuKeysInputs(Menu* menu) {
             case PLAY:
                 // Start gameplay
                 break;
-            case LEADERBOARD:
-                // Show leaderboard
+            case BOSS:
+                //star boss yugi battle
                 break;
             case LOAD:
                 //LOAD last save
+                break;
+            case LEADERBOARD:
+                //show table leaderboard
                 break;
             case CONFIGURATION:
                 // Open configuration menu
@@ -48,17 +63,31 @@ void MenuKeysInputs(Menu* menu) {
 }
 
 //Draws the menu 
-void DrawMenu(Menu* menu) {
+void DrawMenu(Menu* menu, Audio* menuMusic, Texture2D audioIcon, Texture2D redX) {
     
+    //Background
+    //desenha aui o background
+    
+    //Options
     DrawText("PLAY", 400, 50, 40, menu->currentOption == PLAY ? RED : BLACK);
-    DrawText("LOAD", 400, 100, 40, menu->currentOption == LOAD ? RED : BLACK);
-    DrawText("LEADERBOARD", 400, 150, 40, menu->currentOption == LEADERBOARD ? RED : BLACK);
-    DrawText("CONFIGURATION", 400, 200, 40, menu->currentOption == CONFIGURATION ? RED : BLACK);
-    DrawText("EXIT", 400, 250, 40, menu->currentOption == EXIT ? RED : BLACK);
+    DrawText("BOSS", 400, 100, 40, menu->currentOption == BOSS ? RED : BLACK);
+    DrawText("LOAD", 400, 150, 40, menu->currentOption == LOAD ? RED : BLACK);
+    DrawText("LEADERBOARD", 400, 200, 40, menu->currentOption == LEADERBOARD ? RED : BLACK);
+    DrawText("CONFIGURATION", 400, 250, 40, menu->currentOption == CONFIGURATION ? RED : BLACK);
+    DrawText("EXIT", 400, 300, 40, menu->currentOption == EXIT ? RED : BLACK);
+    
+    
+    
+    
+    //Icons
+    DrawTexture(audioIcon, 30, 380, BLACK);
+    if (menuMusic->muted == true)
+        DrawTexture(redX, 30, 380, WHITE);
+    
 }
 
 //Processes the Menu Inputs
-void ProcessMenuInput(Menu* menu) {
+void ProcessMenuInput(Menu* menu, Audio* menuMusic) {
     
     // Handle input events to change menu selection
     if (IsKeyPressed(KEY_UP)) {
@@ -66,8 +95,11 @@ void ProcessMenuInput(Menu* menu) {
             case PLAY:
                 menu->currentOption = EXIT;
                 break;
-            case LOAD:
+            case BOSS:
                 menu->currentOption = PLAY;
+                break;
+            case LOAD:
+                menu->currentOption = BOSS;
                 break;
             case LEADERBOARD:
                 menu->currentOption = LOAD;
@@ -84,6 +116,9 @@ void ProcessMenuInput(Menu* menu) {
     } else if (IsKeyPressed(KEY_DOWN)) {
         switch(menu->currentOption) {
             case PLAY:
+                menu->currentOption = BOSS;
+                break;
+            case BOSS:
                 menu->currentOption = LOAD;
                 break;
             case LOAD:
@@ -101,7 +136,7 @@ void ProcessMenuInput(Menu* menu) {
             default:
                 break;
         }
-    } else if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP)) {
+    } else if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP)) { //ENTER
         // Execute selected option
         switch(menu->currentOption) {
             case PLAY:
@@ -121,6 +156,15 @@ void ProcessMenuInput(Menu* menu) {
                 break;
             default:
                 break;
+        }
+    }else if (IsKeyPressed(KEY_M)){ //Mutando e desmutando o som
+        if (menuMusic->muted == true){
+            ResumeSound(menuMusic->sound);
+            menuMusic->muted = false;
+        }
+        else {
+            PauseSound(menuMusic->sound);
+            menuMusic->muted = true;
         }
     }
     //After moving the options the player can choose one
@@ -154,5 +198,6 @@ void UnloadAudio(Audio* audio) {
 
 void PlayAudio(Audio* audio){ //Playing Music
     SetSoundVolume(audio->sound, audio->volume);
-    PlaySound(audio->sound);
+    if(audio->muted != true)
+        PlaySound(audio->sound);
 }
