@@ -1,0 +1,70 @@
+# depslib dependency file v1.0
+1707707131 source:c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\menu.c
+	"menu.h"
+	<stdio.h>
+	<stdlib.h>
+	"raylib.h"
+
+1707707115 c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\menu.h
+	"raylib.h"
+
+1707707295 source:c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\deque_enc.c
+	"deque_enc.h"
+	"uno.h"
+	<stdio.h>
+	<stdlib.h>
+
+1707708820 c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\deque_enc.h
+	"uno.h"
+
+1707710262 c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\uno.h
+
+1707707295 source:c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\fila_enc.c
+	"fila_enc.h"
+	"uno.h"
+	<stdio.h>
+	<stdlib.h>
+
+1707709107 c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\fila_enc.h
+	"uno.h"
+
+1707707295 source:c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\pilha_enc.c
+	"pilha_enc.h"
+	"uno.h"
+	<stdio.h>
+	<stdlib.h>
+
+1707709107 c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\pilha_enc.h
+	"uno.h"
+
+1707708201 source:c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\lista_enc_dupla.c
+	"lista_enc_dupla.h"
+	"uno.h"
+	<stdio.h>
+	<stdlib.h>
+
+1707710283 c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\lista_enc_dupla.h
+	"uno.h"
+
+1707708389 source:c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\lista_circ_enc_dupla.c
+	"lista_circ_enc_dupla.h"
+	"uno.h"
+	<stdio.h>
+	<stdlib.h>
+
+1707709125 c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\tads\lista_circ_enc_dupla.h
+	"uno.h"
+
+1707710156 source:c:\users\bruno\desktop\trabalho-uno-arthurbusanello-brunofazzioni\main.c
+	"raylib.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"TADs/menu.h"
+	"TADs/uno.h"
+	"TADs/pilha_enc.h"
+	"TADs/fila_enc.h"
+	"TADs/lista_circ_enc_dupla.h"
+	"TADs/lista_enc_dupla.h"
+	"TADs/deque_enc.h"
+
